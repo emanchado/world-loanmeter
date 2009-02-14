@@ -17,10 +17,10 @@ function kivaData () {
                         replace(/LOANUSE/g, loan.use).
                         replace(/LOANSTATUS/g,
                                 loan.status.charAt(0).toUpperCase() +
-                                    loan.status.substr(1) + ' (' +
+                                    loan.status.substr(1) + ' ($' +
                                     (parseFloat(loan.loan_amount) -
                                      parseFloat(loan.funded_amount)) +
-                                    ' of ' + loan.loan_amount + ' funded)');
+                                    ' to go)');
     };
 
     // loanInfo: for now, just a static copy of some old data retrieved from

@@ -92,6 +92,8 @@ dl.map.on dd img {
 dl.map.on dd .loanuse {
 }
 dl.map.on dd .loanstatus {
+        font-size: 85%;
+        font-style: italic;
 }
 dl.map.on dd .loansectoractivity {
         clear: both;
