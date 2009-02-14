@@ -10,8 +10,6 @@
     <script type="text/javascript">
       $(document).ready(function(ev) {
         var data = new kivaData();
-        var linkTemplate = 'http://kiva.org/app.php?page=businesses&action=about&id=LOANID';
-        var imageTemplates = {1: 'http://kiva.org/img/IMGSIZE/IMGID.jpg'};
 
         var counter = 0;
         jQuery.each(data.loanInfo.loans, function () {
@@ -26,18 +24,12 @@
                                                  parseFloat(lat),
                                                  parseFloat(lon));
 
-          htmlString = '<dt><a href="' +
-            linkTemplate.replace('LOANID', loan.id) +
-            '" class="location" id="'+id+'">' +
-            loan.name +
-            '</a></dt><dd><img src="' +
-            imageTemplates[loan.image.template_id].
-                replace('IMGSIZE', 'w80h80').
-                replace('IMGID',   loan.image.id) +
-            '" width="80" height="80" alt="'+loan.location.town+', '+loan.location.country+'" /><strong>' +
-            loan.name +
-            '</strong> the most populated city in the world, with a population of 28025000 people.</dd>';
-          opera.postError(htmlString);
+          htmlString = data.loanInfoWithTemplate(loan,
+            '<dt><a href="LOANLINK" class="location" id="'+id+'">' +
+            'BORROWERNAME</a></dt>' +
+            '<dd><img src="LOANSMALLIMGURL" width="80" height="80" ' +
+            'alt="LOANTOWN, LOANCOUNTRY" /><strong>BORROWERNAME' +
+            '</strong> LOANUSE<br/>LOANSECTOR - LOANACTIVITY</dd>');
           $('#main-map').prepend(htmlString);
         });
 
