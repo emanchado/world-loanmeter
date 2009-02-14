@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>World Kivaness viewer</title>
+    <link rel="stylesheet" type="text/css" href="style/kivaness.css">
+    <script type="text/javascript" src="javascript/loans.js"></script>
+    <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script type="text/javascript" src="javascript/map.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(ev) {
+        var data = new kivaData();
+        var linkTemplate = 'http://kiva.org/app.php?page=businesses&action=about&id=LOANID';
+        var imageTemplates = {1: 'http://kiva.org/img/IMGSIZE/IMGID.jpg'};
+
+        var counter = 0;
+        jQuery.each(data.loanInfo.loans, function () {
+          counter++;
+          var loan = this;
+          var numberTop, numberLeft;
+          [lat, lon] = loan.location.geo.pairs.split(' ');
+
+          var id = 'location'+counter;
+
+          mapMaker.placeIdByLatitudeAndLongitude('a#'+id,
+                                                 parseFloat(lat),
+                                                 parseFloat(lon));
+
+          htmlString = '<dt><a href="' +
+            linkTemplate.replace('LOANID', loan.id) +
+            '" class="location" id="'+id+'">' +
+            loan.name +
+            '</a></dt><dd><img src="' +
+            imageTemplates[loan.image.template_id].
+                replace('IMGSIZE', 'w80h80').
+                replace('IMGID',   loan.image.id) +
+            '" width="80" height="80" alt="'+loan.location.town+', '+loan.location.country+'" /><strong>' +
+            loan.name +
+            '</strong> the most populated city in the world, with a population of 28025000 people.</dd>';
+          opera.postError(htmlString);
+          $('#main-map').prepend(htmlString);
+        });
+
+        $('#footer').html('Powered by jQuery and ' + data.loanInfo.loans.length + ' loans');
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+      </div>
+      <div id="content">
+        <h1>World Kivaness</h1>
+
+<dl id="main-map" class="map">
+
+</dl>
+      </div>
+      <div id="footer">Powered by Opera</div>
+    </div>
+  </body>
+</html>

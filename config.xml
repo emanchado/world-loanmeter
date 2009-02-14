@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<widget>
+  <widgetname>World Kivaness</widgetname>
+  <description>See which parts of the world are benefitting the most from Kiva.org micro-loans</description>
+  <width>560</width>
+  <height>400</height>
+  <author>
+    <name>Esteban Manchado Velázquez</name>
+    <email>emanchado@demiurgo.org</email>
+    <link>http://hcoder.org</link>
+    <organization>HCoder</organization>
+  </author>
+  <id>
+    <host>hcoder.org</host>
+    <name>Kivaness</name>
+    <revised>2009-02</revised>
+  </id>
+</widget>

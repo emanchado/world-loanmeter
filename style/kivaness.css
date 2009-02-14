@@ -1,0 +1,107 @@
+/** Basic styles **/
+
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.1em;
+  padding: 7px 0 0 10px;
+  font-weight: normal;
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 1.1em;
+    margin: 0px;
+}
+
+/** Structure **/
+
+#container {
+  width: 550px;
+}
+
+#header {
+  background-image: url(../images/back_top.png);
+  padding: 4px 10px 0px 10px;
+  height: 35px;
+}
+
+#content {
+  background-image: url(../images/back_center.png);
+  color: #333;
+}
+
+.view{
+    padding: 10px 10px 10px 20px;
+    height: 400px;
+    max-height: 400px;
+    max-width: 550px;
+    overflow: auto;
+    -apple-dashboard-region:dashboard-region(control rectangle 0px 0px 0px 0px);
+}
+
+#footer {
+  background-image: url(../images/back_bottom.png);
+  /* height: 23px; */
+  padding: 2px 0 0 20px;
+  font-size: 0.6em;
+  text-decoration: underline;
+  color: #dd2222;
+}
+
+
+
+
+
+
+/* Accessible Map */
+dl.map.on {
+	position:relative;
+	width:550px;
+	height:275px;
+	background:url(../images/map.jpg) no-repeat;
+	text-align:left;
+	margin:0px;
+	padding:0px;
+	border:#999 1px solid;
+}
+dl.map.on dt {
+	list-style:none;
+	display:inline;
+}
+dl.map.on dd {
+	position:absolute;
+	left:-9999px;
+	width:200px;
+	padding:4px;
+	border:#222 2px solid;
+	background:#666;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	z-index:11;
+	font-size:0.8em;
+	color:#FFF;
+}
+
+dl.map.on a.location {
+	display:block;
+	position:absolute;
+	text-indent:-9999px;
+	background:url(../images/point.png) no-repeat;
+	width:10px;
+	height:10px;
+	outline:none;
+	z-index:10;
+	text-decoration:none;
+}
+dl.map.on a.location:hover {
+	background:url(../images/point-hover.png) no-repeat -1px -1px;
+}
+dl.map.on a#location01 {
+        top:80px;
+        left:484px;
+}
