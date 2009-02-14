@@ -14,7 +14,13 @@ function kivaData () {
                         replace(/LOANCOUNTRY/g, loan.location.country).
                         replace(/LOANACTIVITY/g, loan.activity).
                         replace(/LOANSECTOR/g, loan.sector).
-                        replace(/LOANUSE/g, loan.use);
+                        replace(/LOANUSE/g, loan.use).
+                        replace(/LOANSTATUS/g,
+                                loan.status.charAt(0).toUpperCase() +
+                                    loan.status.substr(1) + ' (' +
+                                    (parseFloat(loan.loan_amount) -
+                                     parseFloat(loan.funded_amount)) +
+                                    ' of ' + loan.loan_amount + ' funded)');
     };
 
     // loanInfo: for now, just a static copy of some old data retrieved from

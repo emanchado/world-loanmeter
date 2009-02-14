@@ -89,7 +89,11 @@ dl.map.on dd {
 dl.map.on dd img {
         float: right;
 }
-dl.map.on dd .sectoractivity {
+dl.map.on dd .loanuse {
+}
+dl.map.on dd .loanstatus {
+}
+dl.map.on dd .loansectoractivity {
         clear: both;
         font-style: italic;
 }
