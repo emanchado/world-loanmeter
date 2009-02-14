@@ -76,7 +76,7 @@ dl.map.on dt {
 dl.map.on dd {
 	position:absolute;
 	left:-9999px;
-	width:200px;
+	width:275px;
 	padding:4px;
 	border:#222 2px solid;
 	background:#666;
@@ -85,6 +85,13 @@ dl.map.on dd {
 	z-index:11;
 	font-size:0.8em;
 	color:#FFF;
+}
+dl.map.on dd img {
+        float: right;
+}
+dl.map.on dd .sectoractivity {
+        clear: both;
+        font-style: italic;
 }
 
 dl.map.on a.location {
