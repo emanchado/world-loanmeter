@@ -29,10 +29,10 @@ var mapMaker = {
 						//current Location
 						currentLocation = mapMaker.DTs[ii].firstChild;
 						// add events to links
-						mapMaker.addEvt(currentLocation,'mouseover',mapMaker.showTooltip);//displays tooltip on mouse over
-						mapMaker.addEvt(currentLocation,'mouseout',mapMaker.hideTooltip);//hide tooltip on mouse out
-						mapMaker.addEvt(currentLocation,'focus',mapMaker.showTooltip);//display tooltip on focus, for added keyboard accessibility
-						mapMaker.addEvt(currentLocation,'blur',mapMaker.hideTooltip);//hide tooltip on focus, for added keyboard accessibility
+						mapMaker.addEvt(currentLocation,'mouseover',mapMaker.showTooltip);
+						mapMaker.addEvt(currentLocation,'mouseout',mapMaker.hideTooltip);
+						mapMaker.addEvt(currentLocation,'focus',mapMaker.showTooltip);
+						mapMaker.addEvt(currentLocation,'blur',mapMaker.hideTooltip);
 						ii++;
 					};
 					ii=0;
@@ -152,4 +152,4 @@ mapMaker.fixEvent.stopPropagation = function() {this.cancelBubble = true;};
 mapMaker.addEvt.guid = 1;
 
 
-mapMaker.addEvt( window, 'load', mapMaker.init);
+mapMaker.addEvt(window, 'load', mapMaker.init);

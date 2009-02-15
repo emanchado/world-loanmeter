@@ -2,7 +2,7 @@
 <widget>
   <widgetname>World Kivaness</widgetname>
   <description>See which parts of the world are benefitting the most from Kiva.org micro-loans</description>
-  <width>560</width>
+  <width>870</width>
   <height>400</height>
   <author>
     <name>Esteban Manchado Velázquez</name>
