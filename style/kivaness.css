@@ -155,3 +155,64 @@ dl.map.on a.location {
 dl.map.on a.location:hover {
 	background:url(../images/point-hover.png) no-repeat -1px -1px;
 }
+
+
+
+/* Left information panel */
+#info-panel {
+    position: absolute;
+    top: 47px;
+    left: 565px;
+    width: 300px;
+    height: 277px;
+    background-color: #99f;
+    overflow: auto;
+}
+
+a.location {
+	display:block;
+	position:absolute;
+	text-indent:-9999px;
+	background:url(../images/point.png) no-repeat;
+	width:10px;
+	height:10px;
+	outline:none;
+	z-index:10;
+	text-decoration:none;
+}
+a.location:hover {
+	background:url(../images/point-hover.png) no-repeat -1px -1px;
+}
+
+.loan-title {
+        font-weight: bold;
+}
+.loan-info {
+        clear: both;
+        font-size: 10pt;
+        padding: 5px;
+}
+.odd {
+        background-color: #bbf;
+}
+.even {
+        background-color: #99f;
+}
+.loan-info .loan-title {
+        font-size: 11pt;
+}
+.loan-info img {
+        float: right;
+        margin-left: 5px;
+        margin-bottom: 5px;
+}
+.loan-info .loanuse {
+}
+.loan-info .loanstatus {
+        font-size: 85%;
+        font-style: italic;
+}
+.loan-info .loansectoractivity {
+        clear: both;
+        font-style: italic;
+}
