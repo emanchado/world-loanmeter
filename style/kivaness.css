@@ -22,6 +22,7 @@ h2 {
 
 #front {
   margin: 0;
+  margin-left: 5px;
   border: 0;
   padding: 0;
 }
@@ -29,6 +30,7 @@ h2 {
 #config {
   display: none;
   margin: 0;
+  margin-left: 10px;
   border: 0;
   padding: 0;
 }
@@ -49,7 +51,7 @@ h2 {
 #content {
   background-image: url(../images/back_center.png);
   color: #333;
-  margin-left: 5px;
+  margin-left: 0;
 }
 
 #footer {
