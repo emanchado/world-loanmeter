@@ -14,6 +14,21 @@
 
       $(document).ready(function(ev) {
         map.placeLoans();
+
+        $('#flipbutton').click(function () {
+          var display = $('#front').css('display');
+          if (display == 'block' || display == '') {
+              $('#front').css('display', "none");
+              $('#config').css('display', "block");
+          } else {
+              $('#config').css('display', "none");
+              $('#front').css('display', "block");
+          }
+        });
+
+        $('#closebutton').click(function () {
+          window.close();
+        });
       });
     </script>
   </head>
@@ -27,16 +42,26 @@
         <h1>World Loanmeter</h1>
       </div>
       <div id="content">
-<dl id="main-map" class="map">
-</dl>
+        <div id="front">
+          <dl id="main-map" class="map"></dl>
+          <div id="info-panel"><div class="loan-info instructions"><p>Hover an
+              area to get information about loans in that part of the world.
+              Red dots mean there is at least one loan in that area that needs
+              money.</p>
+              <p>Then click on a name or image for more information and/or lend
+              money to the person in <a
+                href="http://www.kiva.org">Kiva.org</a>.</p>
+          </div></div>
+        </div>
+        <div id="config">
+          <h2>Configuration</h2>
+          <p>
+             <label for="frontlabel">Text to display</label>
+             <input id="frontlabel" type="text" size="25">
+             <button id="updatebutton" type="button">Update</button>
+          </p>
+        </div>
       </div>
-      <div id="info-panel"><div class="loan-info instructions"><p>Hover an area
-          to get information about loans in that part of the world. Red dots
-          mean there is at least one loan in that area that needs money.</p>
-          <p>Then click on a name or image for more information and/or lend
-          money to the person in <a
-            href="http://www.kiva.org">Kiva.org</a>.</p>
-      </div></div>
       <div id="footer">Powered by Opera Widgets, jQuery and <a href="http://build.kiva.org/">Kiva API</a></div>
     </div>
   </body>

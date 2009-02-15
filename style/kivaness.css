@@ -20,6 +20,19 @@ h2 {
 
 /** Structure **/
 
+#front {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+#config {
+  display: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 #container {
   /* width: 560px; */
   margin: 0;
@@ -37,15 +50,6 @@ h2 {
   background-image: url(../images/back_center.png);
   color: #333;
   margin-left: 5px;
-}
-
-.view {
-    padding: 10px 10px 10px 20px;
-    height: 400px;
-    max-height: 400px;
-    max-width: 550px;
-    overflow: auto;
-    -apple-dashboard-region:dashboard-region(control rectangle 0px 0px 0px 0px);
 }
 
 #footer {
