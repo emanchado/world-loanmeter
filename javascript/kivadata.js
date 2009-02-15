@@ -1,7 +1,13 @@
 function kivaData () {
+    // See http://build.kiva.org/docs/data/loans
     this.linkTemplate = 'http://kiva.org/app.php?page=businesses&action=about&id=LOANID';
+    // See http://build.kiva.org/docs/data/media
     this.imageTemplates = {1: 'http://kiva.org/img/IMGSIZE/IMGID.jpg'};
 
+    // loanInfoWithTemplate:
+    // Interpolates certain special strings in the given "template". The
+    // interpolation values are taken from the given "loan". It returns the
+    // final, interpolated string
     this.loanInfoWithTemplate = function (loan, template) {
         return template.replace(/LOANLINK/g,
                                 this.linkTemplate.replace('LOANID', loan.id)).

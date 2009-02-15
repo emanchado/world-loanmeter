@@ -3,16 +3,15 @@
   <head>
     <title>World Kivaness viewer</title>
     <link rel="stylesheet" type="text/css" href="style/kivaness.css">
-    <script type="text/javascript" src="javascript/loans.js"></script>
+    <script type="text/javascript" src="javascript/kivadata.js"></script>
     <script type="text/javascript" src="javascript/jquery.js"></script>
     <script type="text/javascript" src="javascript/map.js"></script>
 
     <script type="text/javascript">
+      var data         = new kivaData();
       var loansInPlace = {};
 
       $(document).ready(function(ev) {
-        var data = new kivaData();
-
         var counter = 0;
         jQuery.each(data.loanInfo.loans, function () {
           counter++;
