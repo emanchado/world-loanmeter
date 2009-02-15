@@ -31,17 +31,24 @@ function kivaMap (data) {
                                             '</div>'];
           }
 
-          var extraClass = (self.loansInPlace[placeId].length % 2 == 0) ?
+          var infoExtraClass = (self.loansInPlace[placeId].length % 2 == 0) ?
                                 'odd' : 'even';
           self.loansInPlace[placeId].push(self.data.loanInfoWithTemplate(loan,
-            '<div class="loan-info ' + extraClass +
-              '"><a href="LOANLINK"><img src="LOANSMALLIMGURL" width="80" ' +
-              'height="80" LOANTOWN, LOANCOUNTRY" /></a>' +
+            '<div class="loan-info ' + infoExtraClass +
+              '"><a href="LOANLINK"><img src="LOANSMALLIMGURL" ' +
+              'alt="LOANTOWN, LOANCOUNTRY" /></a>' +
               '<div class="loan-title"><a href="LOANLINK">BORROWERNAME</a></div>' +
               '<div class="loanuse">LOANUSE</div>' +
               '<div class="loanstatus">LOANSTATUS</div>' +
               '<div class="loansectoractivity">LOANSECTOR - LOANACTIVITY</div>' +
               '</div>'));
+
+          // If any of the loans needs more money, add the 'needmoney' class
+          if (parseFloat(loan.loan_amount) -
+                  parseFloat(loan.funded_amount) > 0 &&
+                  ! $('#' + placeId).hasClass('needmoney')) {
+              $('#' + placeId).addClass('needmoney');
+          }
         });
     };
 

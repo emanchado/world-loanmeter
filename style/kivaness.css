@@ -134,7 +134,15 @@ a.location {
 a.location:hover {
 	background:url(../images/point-hover.png) no-repeat -1px -1px;
 }
+a.location.needmoney {
+	background:url(../images/point-deficit.png) no-repeat;
+}
 
+.loan-location {
+        font-weight: bold;
+        margin-left: 8px;
+        font-size: 13pt;
+}
 .loan-title {
         font-weight: bold;
 }
