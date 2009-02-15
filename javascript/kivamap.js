@@ -52,6 +52,12 @@ function kivaMap (data) {
         });
     };
 
+    this.refresh = function () {
+        this.loansInPlace = {};
+        $('#main-map').html('');
+        this.placeLoans();
+    };
+
     this.showInfoInPanel = function (locationId) {
         $('#info-panel').html(this.loansInPlace[locationId].join(''));
     };
