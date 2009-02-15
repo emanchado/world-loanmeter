@@ -12,18 +12,23 @@ function kivaMap (data) {
           var placeId = 'location' +
                           loan.location.geo.pairs.replace(/[^0-9]/g, '-');
           if (self.loansInPlace[placeId] == undefined) { // First loan
-            self.loansInPlace[placeId] = [];
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
             mapMaker.placeIdByLatitudeAndLongitude('#'+placeId,
                                                    parseFloat(lat),
                                                    parseFloat(lon));
             htmlString = '<a class="location" href="#" ' +
-                            'onmouseover="map.showInfoInPanel(\'' + placeId +
-                            '\'); return false;" id="' + placeId +
+                            'id="' + placeId +
                             '">' + placeId + '</a>';
 
             $('#main-map').prepend(htmlString);
+            var f = function () { map.showInfoInPanel(placeId); return false };
+            $('#'+placeId).mouseover(f).focus(f);
+
+            self.loansInPlace[placeId] = ['<div class="loan-location">' +
+                                            loan.location.town + ', ' +
+                                            loan.location.country
+                                            '</div>'];
           }
 
           var extraClass = (self.loansInPlace[placeId].length % 2 == 0) ?
