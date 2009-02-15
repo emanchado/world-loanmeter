@@ -185,3 +185,6 @@ a.location.needmoney {
 .instructions {
         font-style: italic;
 }
+.instructions p:first-child {
+        margin-top: 0;
+}
