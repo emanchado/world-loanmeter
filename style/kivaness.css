@@ -97,8 +97,7 @@ h2 {
 
 
 
-/* Accessible Map */
-dl.map.on {
+#main-map {
 	position:relative;
 	width:550px;
 	height:275px;
@@ -108,52 +107,6 @@ dl.map.on {
 	padding:0px;
 	border:#999 1px solid;
 }
-dl.map.on dt {
-	list-style:none;
-	display:inline;
-}
-dl.map.on dd {
-	position:absolute;
-	left:-9999px;
-	width:275px;
-	padding:4px;
-	border:#222 2px solid;
-	background:#666;
-	-moz-border-radius:8px;
-	border-radius:8px;
-	z-index:11;
-	font-size:0.8em;
-	color:#FFF;
-}
-dl.map.on dd img {
-        float: right;
-}
-dl.map.on dd .loanuse {
-}
-dl.map.on dd .loanstatus {
-        font-size: 85%;
-        font-style: italic;
-}
-dl.map.on dd .loansectoractivity {
-        clear: both;
-        font-style: italic;
-}
-
-dl.map.on a.location {
-	display:block;
-	position:absolute;
-	text-indent:-9999px;
-	background:url(../images/point.png) no-repeat;
-	width:10px;
-	height:10px;
-	outline:none;
-	z-index:10;
-	text-decoration:none;
-}
-dl.map.on a.location:hover {
-	background:url(../images/point-hover.png) no-repeat -1px -1px;
-}
-
 
 
 /* Left information panel */
