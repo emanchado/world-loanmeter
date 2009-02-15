@@ -3,51 +3,18 @@
   <head>
     <title>World Kivaness viewer</title>
     <link rel="stylesheet" type="text/css" href="style/kivaness.css">
-    <script type="text/javascript" src="javascript/kivadata.js"></script>
     <script type="text/javascript" src="javascript/jquery.js"></script>
+    <script type="text/javascript" src="javascript/kivadata.js"></script>
     <script type="text/javascript" src="javascript/map.js"></script>
+    <script type="text/javascript" src="javascript/kivamap.js"></script>
 
     <script type="text/javascript">
       var data         = new kivaData();
-      var loansInPlace = {};
+      var map          = new kivaMap(data);
 
       $(document).ready(function(ev) {
-        jQuery.each(data.loanInfo.loans, function () {
-          var loan = this;
-
-          // Collect all the loans in each place, and put only one dot in the
-          // map for each place
-          var placeId = 'location' +
-                          loan.location.geo.pairs.replace(/[^0-9]/g, '-');
-          if (loansInPlace[placeId] == undefined) { // First loan
-            loansInPlace[placeId] = [];
-            [lat, lon] = loan.location.geo.pairs.split(' ');
-            mapMaker.placeIdByLatitudeAndLongitude('a#'+placeId,
-                                                   parseFloat(lat),
-                                                   parseFloat(lon));
-            htmlString = data.loanInfoWithTemplate(loan,
-              '<a class="location" href="#" onmouseover="showInfoInPanel(\'' + placeId + '\'); return false;" id="' + placeId + '">click here</a>');
-          }
-
-          var extraClass = (loansInPlace[placeId].length % 2 == 0) ? 'odd' :
-                                                                     'even';
-          loansInPlace[placeId].push(data.loanInfoWithTemplate(loan,
-            '<div class="loan-info ' + extraClass +
-              '"><img src="LOANSMALLIMGURL" width="80" height="80" ' +
-              'alt="LOANTOWN, LOANCOUNTRY" />' +
-              '<div class="loan-title"><a href="LOANLINK">BORROWERNAME</a></div>' +
-              '<div class="loanuse">LOANUSE</div>' +
-              '<div class="loanstatus">LOANSTATUS</div>' +
-              '<div class="loansectoractivity">LOANSECTOR - LOANACTIVITY</div>' +
-              '</div>'));
-
-          $('#main-map').prepend(htmlString);
-        });
+        map.placeLoans();
       });
-
-      function showInfoInPanel (locationId) {
-        $('#info-panel').html(loansInPlace[locationId].join(''));
-      }
     </script>
   </head>
   <body>
