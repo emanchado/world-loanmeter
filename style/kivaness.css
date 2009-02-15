@@ -199,6 +199,9 @@ a.location:hover {
 .loan-info .loan-title {
         font-size: 11pt;
 }
+.loan-info .loan-title a {
+        text-decoration: none;
+}
 .loan-info img {
         float: right;
         margin-left: 5px;
