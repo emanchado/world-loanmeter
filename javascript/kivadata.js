@@ -2,7 +2,30 @@ function kivaData () {
     // See http://build.kiva.org/docs/data/loans
     this.linkTemplate = 'http://kiva.org/app.php?page=businesses&action=about&id=LOANID';
     // See http://build.kiva.org/docs/data/media
-    this.imageTemplates = {1: 'http://kiva.org/img/IMGSIZE/IMGID.jpg'};
+    this.imageTemplates = [
+        {"id":      1,
+         "pattern": "http:\/\/www.kiva.org\/img\/<size>\/<id>.jpg"}
+    ];
+
+    this._findImageTemplate = function (templateId) {
+        var returnValue = undefined;
+        jQuery.each(this.imageTemplates, function () {
+            if (this.id == templateId) {
+                returnValue = this.pattern;
+            }
+        });
+        return returnValue;
+    };
+
+    // Return the image template for the given templateId. If necessary, it
+    // will try to fetch the image templates from the Kiva website
+    this.getImageTemplate = function (templateId) {
+        if (this._findImageTemplate(templateId) == undefined) {
+            var result = jQuery.getJSON('http://api.kivaws.org/v1/templates/images.json');
+            this.imageTemplates = result.templates;
+        }
+        return this._findImageTemplate(templateId);
+    };
 
     // loanInfoWithTemplate:
     // Interpolates certain special strings in the given "template". The
@@ -12,9 +35,9 @@ function kivaData () {
         return template.replace(/LOANLINK/g,
                                 this.linkTemplate.replace('LOANID', loan.id)).
                         replace(/LOANSMALLIMGURL/g,
-                                this.imageTemplates[loan.image.template_id].
-                                    replace('IMGSIZE', 'w80h80').
-                                    replace('IMGID',   loan.image.id)).
+                                this.getImageTemplate(loan.image.template_id).
+                                    replace('<size>', 'w80h80').
+                                    replace('<id>',   loan.image.id)).
                         replace(/BORROWERNAME/g, loan.name).
                         replace(/LOANTOWN/g, loan.location.town).
                         replace(/LOANCOUNTRY/g, loan.location.country).
