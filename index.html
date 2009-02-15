@@ -46,8 +46,6 @@
 
           $('#main-map').prepend(htmlString);
         });
-
-        $('#footer').html('Powered by jQuery and ' + data.loanInfo.loans.length + ' loans');
       });
 
       function showInfoInPanel (locationId) {
@@ -68,8 +66,8 @@
 <dl id="main-map" class="map">
 </dl>
       </div>
-      <div id="info-panel">Hover an area to get information about loans</div>
-      <div id="footer">Powered by Opera</div>
+      <div id="info-panel"><div class="loan-info instructions">Hover an area to get information about loans</div></div>
+      <div id="footer">Powered by Opera Widgets, jQuery and <a href="http://build.kiva.org/">Kiva API</a></div>
     </div>
   </body>
 </html>

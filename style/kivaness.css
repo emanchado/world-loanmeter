@@ -53,8 +53,6 @@ h2 {
   height: 23px;
   padding: 2px 0 0 20px;
   font-size: 0.6em;
-  text-decoration: underline;
-  color: #dd2222;
 }
 
 
@@ -214,5 +212,8 @@ a.location:hover {
 }
 .loan-info .loansectoractivity {
         clear: both;
+        font-style: italic;
+}
+.instructions {
         font-style: italic;
 }
