@@ -30,9 +30,12 @@ h2 {
 #config {
   display: none;
   margin: 0;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 3px;
   border: 0;
   padding: 0;
+  padding-left: 10px;
+  background-color: #99f;
 }
 
 #container {
