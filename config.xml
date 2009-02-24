@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<widget>
+<widget network="public">
   <widgetname>World Loanmeter</widgetname>
   <description>See which parts of the world are benefitting the most from Kiva.org micro-loans</description>
   <width>870</width>
