@@ -9,8 +9,7 @@ function kivaMap (data) {
 
           // Collect all the loans in each place, and put only one dot in the
           // map for each place
-          var placeId = 'location' +
-                          loan.location.geo.pairs.replace(/[^0-9]/g, '-');
+          var placeId = loan.location.country.replace(/[^a-z]/g, '-');
           if (self.loansInPlace[placeId] == undefined) { // First loan
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
@@ -26,13 +25,12 @@ function kivaMap (data) {
             $('#'+placeId).mouseover(f).focus(f);
 
             self.loansInPlace[placeId] = ['<div class="loan-location">' +
-                                            loan.location.town + ', ' +
                                             loan.location.country +
                                             '</div>'];
           }
 
           var infoExtraClass = (self.loansInPlace[placeId].length % 2 == 0) ?
-                                'odd' : 'even';
+                                'even' : 'odd';
           self.loansInPlace[placeId].push(self.data.loanInfoWithTemplate(loan,
             '<div class="loan-info ' + infoExtraClass +
               '"><a href="LOANLINK"><img src="LOANSMALLIMGURL" ' +
