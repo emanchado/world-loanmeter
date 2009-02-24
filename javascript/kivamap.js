@@ -27,7 +27,7 @@ function kivaMap (data) {
 
             self.loansInPlace[placeId] = ['<div class="loan-location">' +
                                             loan.location.town + ', ' +
-                                            loan.location.country
+                                            loan.location.country +
                                             '</div>'];
           }
 

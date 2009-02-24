@@ -21,5 +21,5 @@ var mapMaker = {
                            'left: ' + pxLeft + 'px}';
       styleElement.appendChild(document.createTextNode(cssRule));
       document.body.appendChild(styleElement);
-    },
+    }
 };
