@@ -9,7 +9,8 @@ function kivaMap (data) {
 
           // Collect all the loans in each place, and put only one dot in the
           // map for each place
-          var placeId = loan.location.country.replace(/[^a-z]/g, '-');
+          var placeId = 'location' +
+                            loan.location.country.replace(/[^a-z]/gi, '-');
           if (self.loansInPlace[placeId] == undefined) { // First loan
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
