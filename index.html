@@ -13,8 +13,10 @@
       var map          = new kivaMap(data);
 
       $(document).ready(function(ev) {
+        $('#spinner').show('fast');
         data.refresh(function () {
           map.placeLoans();
+          $('#spinner').hide('fast');
         });
 
         $('#flipbutton').click(function () {
@@ -26,8 +28,10 @@
         });
 
         $('#updatebutton').click(function () {
+          $('#spinner').show('fast');
           data.refresh(function () {
             map.refresh();
+            $('#spinner').hide('fast');
             flip();
           });
         });
@@ -51,6 +55,7 @@
     <div id="container">
       <div id="header">
         <div id="controlbuttons">
+          <img id="spinner" width="25" height="25" src="images/spinner.gif"/>
           <button id="flipbutton" class="controlbutton" type="button"></button>
           <button id="closebutton" class="controlbutton" type="button"></button>
         </div>

@@ -85,6 +85,11 @@ h2 {
 #closebutton {
   background: transparent url(../images/btn_close.png) scroll no-repeat 0 0;
 }
+#spinner {
+  float: left;
+  height: 30px;
+  width: 30px;
+}
 
 /** Button effects **/
 
