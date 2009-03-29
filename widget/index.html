@@ -9,8 +9,8 @@
     <script type="text/javascript" src="javascript/kivamap.js"></script>
 
     <script type="text/javascript">
-      var data         = new kivaData();
-      var map          = new kivaMap(data);
+      var data         = new KivaData();
+      var map          = new KivaMap('#main-map', '#map-css', data);
 
       $(document).ready(function(ev) {
         $('#spinner').show('fast');
@@ -27,7 +27,10 @@
           window.close();
         });
 
+        $('#numberloans').val(data.numberLoans);
+
         $('#updatebutton').click(function () {
+          data.numberLoans = $('#numberloans').val();
           $('#spinner').show('fast');
           data.refresh(function () {
             map.refresh();
@@ -50,6 +53,7 @@
         }
       }
     </script>
+    <style type="text/css" id="map-css"></style>
   </head>
   <body>
     <div id="container">
@@ -76,10 +80,11 @@
         <div id="config">
           <h2>Configuration</h2>
 
-          <p class="instructions">Click "Update" to update the data from
-          Kiva.org.</p>
-
           <div style="padding-bottom: 10px">
+            <div>
+              Number of loans to show:
+              <input type="text" id="numberloans" name="numberloans" size="3" maxlength="3" value="" />
+            </div>
             <button id="updatebutton" type="button">Update</button>
           </div>
         </div>

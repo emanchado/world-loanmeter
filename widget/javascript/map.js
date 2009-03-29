@@ -9,17 +9,16 @@ var mapMaker = {
                  parseInt((longitude       + 180) * (this.mapWidth  / 360)) ];
     },
 
-    // placeIdByLatitudeAndLongitude: defines a CSS style block placing the
-    // given element (identified by css selector "cssSel") in the given
-    // latitude and longitude
-    placeIdByLatitudeAndLongitude: function (cssSel, latitude, longitude) {
+    // placeIdByLatitudeAndLongitude: adds appropriate CSS to the given style
+    // element (identified by mapStyleElementSelector) placing the given
+    // element (identified by css selector "dotSel") in the given latitude and
+    // longitude
+    placeIdByLatitudeAndLongitude: function (mapStyleElementSelector, dotSel,
+                                             latitude, longitude) {
       var cssTop, cssLeft;
       [pxTop, pxLeft] = this.latLongToPixels(latitude, longitude);
-      var styleElement = document.createElement("style");
-      styleElement.type = 'text/css';
-      cssRule = cssSel + ' {top:  ' + pxTop  + 'px; ' +
-                           'left: ' + pxLeft + 'px}';
-      styleElement.appendChild(document.createTextNode(cssRule));
-      document.body.appendChild(styleElement);
+      cssRule = dotSel + ' {top:  ' + pxTop  + 'px; ' +
+                           'left: ' + pxLeft + 'px}\n';
+      $(mapStyleElementSelector).append(cssRule);
     }
 };

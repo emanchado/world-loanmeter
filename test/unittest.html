@@ -4,6 +4,8 @@
 <head>
   <script src="../widget/javascript/jquery.js"></script>
   <script src="../widget/javascript/kivadata.js"></script>
+  <script src="fixtures/loans-simple.js"></script>
+  <script src="fixtures/loans-two-pages.js"></script>
   <script src="../widget/javascript/map.js"></script>
   <link rel="stylesheet" href="testsuite.css" type="text/css" media="screen" />
 
@@ -12,11 +14,169 @@
 
 module("Latitude/longitude conversion");
 
-test("a basic test example", function() {
+test("Basic latLongToPixels tests", function() {
   var x, y;
   [x,y] = mapMaker.latLongToPixels(12.5833, -16.2719);
   equals(x, 118, "The 'x' is correct");
   equals(y, 250, "The 'y' is correct");
+});
+
+module("eachLoan iterator");
+
+test("eachLoan simple test", function() {
+  var kivaData = new KivaData();
+  kivaData.loanInfo = loansSimple;
+  var loanList = [];
+  kivaData.eachLoan(function () {
+    loanList.push(this);
+  });
+  equals(loanList.length, 3,
+         "Should have iterated over 3 loans");
+  equals(loanList[0].name, 'Fatoumata Coly',
+         "Name of first loan should be correct");
+  equals(loanList[1].name, 'Marie Gomis',
+         "Name of second loan should be correct");
+  equals(loanList[2].name, 'Lydia Afriyie',
+         "Name of third loan should be correct");
+});
+
+module("Data fetching");
+
+test("fetchLoanData function test", function() {
+  var kivaData = new KivaData();
+  kivaData.dataSource = function (n) { return "function value" };
+  var result = undefined;
+  kivaData.fetchLoanData(1, function (data) { result = data; });
+  equals(result, 'function value',
+         "fetchLoanData should call dataSource if it's a function");
+});
+
+test("fetchLoanData object test", function() {
+  var kivaData = new KivaData();
+  kivaData.dataSource = ['some', 'list'];
+  var result = undefined;
+  kivaData.fetchLoanData(1, function (data) { result = data; });
+  equals(result.length, 2,  "The result list should have two elements");
+  equals(result[0], 'some', "The result's first element should be 'some'");
+  equals(result[1], 'list', "The result's second element should be 'list'");
+});
+
+test("refresh method", function() {
+  var kivaData = new KivaData();
+  kivaData.dataSource = ['some', 'list'];
+  var result = undefined;
+  kivaData.fetchLoanData(1, function (data) { result = data; });
+  equals(result.length, 2,  "The result list should have two elements");
+  equals(result[0], 'some', "The result's first element should be 'some'");
+  equals(result[1], 'list', "The result's second element should be 'list'");
+});
+
+test("addLoans method", function() {
+  var kivaData = new KivaData();
+  equals(kivaData.loanInfo.loans.length, 0,
+         "There should be no loans initially");
+  kivaData.addLoans({'loans': [{'foo': 'bar'}, {'qux': 'flux'}]});
+  equals(kivaData.loanInfo.loans.length, 2,
+         "There should be 2 loans");
+
+  // Load at most one more loan
+  kivaData.addLoans({'loans': [{'third': 'and last'},
+                               {'extra': 'should not load'}]},
+                    1);
+  equals(kivaData.loanInfo.loans.length, 3,
+         "atMost parameter should be honoured");
+
+  // Less loans than atMost
+  kivaData.addLoans({'loans': [{'one': 'first'}, {'two': 'last'}]},
+                    3);
+  equals(kivaData.loanInfo.loans.length, 5,
+         "Nothing strange should happen if there are less loans than atMost");
+});
+
+test("loadLoans infinite loop protection", function() {
+  expect(1);
+  var kivaData = new KivaData();
+  kivaData.numberLoans = 3;
+
+  // Dummy data source, never returns loans
+  kivaData.dataSource = {'loans': []}
+  kivaData.loadLoans(1, function () {
+    equals(kivaData.loanInfo.loans.length, 0,
+           "If there are no loans, it should not get into an infinite loop");
+  });
+});
+
+test("loadLoans pagination tests", function() {
+  expect(18);
+  var kivaData = new KivaData();
+  kivaData.numberLoans = 3;
+
+  // This data source will iterate over the pages in the loanPages variable
+  kivaData.dataSource = function (counter) {
+    return loanPages[(counter-1) % loanPages.length]
+  };
+  equals(kivaData.loanInfo.loans.length, 0,
+         "There should be no loans initially");
+  kivaData.loadLoans(1, function () {
+    equals(kivaData.loanInfo.loans.length, 3,
+           "There should be 3 loans");
+    equals(kivaData.loanInfo.loans[0].name, 'Fatoumata Coly',
+           "The name for the first loan should be correct");
+    equals(kivaData.loanInfo.loans[1].name, 'Marie Gomis',
+           "The name for the second loan should be correct");
+    equals(kivaData.loanInfo.loans[2].name, 'Lydia Afriyie',
+           "The name for the third loan should be correct");
+  });
+
+
+  // Again, now needing one loan from the second page
+  var kivaDataSecondPage = new KivaData();
+  kivaDataSecondPage.numberLoans = 4;
+
+  // This data source will iterate over the pages in the loanPages variable
+  kivaDataSecondPage.dataSource = function (counter) {
+    return loanPages[(counter-1) % loanPages.length]
+  };
+  equals(kivaDataSecondPage.loanInfo.loans.length, 0,
+         "There should be no loans initially");
+  kivaDataSecondPage.loadLoans(1, function () {
+    equals(kivaDataSecondPage.loanInfo.loans.length, 4,
+           "There should be 4 loans");
+    equals(kivaDataSecondPage.loanInfo.loans[0].name, 'Fatoumata Coly',
+           "The name for the first loan should be correct");
+    equals(kivaDataSecondPage.loanInfo.loans[1].name, 'Marie Gomis',
+           "The name for the second loan should be correct");
+    equals(kivaDataSecondPage.loanInfo.loans[2].name, 'Lydia Afriyie',
+           "The name for the third loan should be correct");
+    equals(kivaDataSecondPage.loanInfo.loans[3].name, 'Esther Adu',
+           "The name for the fourth loan should be correct");
+  });
+
+
+  // Again, now needing one loan from the second page
+  var kivaDataThreePages = new KivaData();
+  kivaDataThreePages.numberLoans = 8;
+
+  // This data source will iterate over the pages in the loanPages variable
+  kivaDataThreePages.dataSource = function (counter) {
+    return loanPages[(counter-1) % loanPages.length]
+  };
+  equals(kivaDataThreePages.loanInfo.loans.length, 0,
+         "There should be no loans initially");
+  kivaDataThreePages.loadLoans(1, function () {
+    equals(kivaDataThreePages.loanInfo.loans.length, 8,
+           "There should be 8 loans");
+    equals(kivaDataThreePages.loanInfo.loans[0].name, 'Fatoumata Coly',
+           "The name for the first loan should be correct");
+    equals(kivaDataThreePages.loanInfo.loans[1].name, 'Marie Gomis',
+           "The name for the second loan should be correct");
+    equals(kivaDataThreePages.loanInfo.loans[2].name, 'Lydia Afriyie',
+           "The name for the third loan should be correct");
+    equals(kivaDataThreePages.loanInfo.loans[3].name, 'Esther Adu',
+           "The name for the fourth loan should be correct");
+    equals(kivaDataThreePages.loanInfo.loans[7].name, 'Fatoumata Coly',
+           "The name for the eighth loan should be correct");
+  });
 });
 
   });

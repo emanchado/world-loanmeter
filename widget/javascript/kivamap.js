@@ -1,10 +1,12 @@
-function kivaMap (data) {
-    this.data         = data;
-    this.loansInPlace = {};
+function KivaMap (mapSelector, mapCssSelector, data) {
+    this.mapSelector    = mapSelector;
+    this.mapCssSelector = mapCssSelector;
+    this.data           = data;
+    this.loansInPlace   = {};
 
     this.placeLoans = function () {
         var self = this;
-        jQuery.each(this.data.loanInfo.loans, function () {
+        this.data.eachLoan(function () {
           var loan = this;
 
           // Collect all the loans in each place, and put only one dot in the
@@ -14,14 +16,15 @@ function kivaMap (data) {
           if (self.loansInPlace[placeId] == undefined) { // First loan
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
-            mapMaker.placeIdByLatitudeAndLongitude('#'+placeId,
+            mapMaker.placeIdByLatitudeAndLongitude(self.mapCssSelector,
+                                                   '#'+placeId,
                                                    parseFloat(lat),
                                                    parseFloat(lon));
             htmlString = '<a class="location" href="#" ' +
                             'id="' + placeId +
                             '">' + placeId + '</a>';
 
-            $('#main-map').prepend(htmlString);
+            $(self.mapSelector).prepend(htmlString);
             var f = function () { map.showInfoInPanel(placeId); return false };
             $('#'+placeId).mouseover(f).focus(f);
 
@@ -53,7 +56,8 @@ function kivaMap (data) {
 
     this.refresh = function () {
         this.loansInPlace = {};
-        $('#main-map').html('');
+        $(this.mapSelector).html('');
+        $(this.mapCssSelector).html('');
         this.placeLoans();
     };
 
