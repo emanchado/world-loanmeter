@@ -7,4 +7,4 @@ all: widget
 widget: $(WIDGET_PATH)
 
 $(WIDGET_PATH):
-	zip -9r $@ widget/
+	cd widget && zip -9r ../$@ *
