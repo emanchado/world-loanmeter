@@ -79,6 +79,7 @@ function KivaData () {
         this.loadLoans(1, f);
     };
 
+    // Iterator for loans
     this.eachLoan = function(f) {
         jQuery.each(this.loanInfo.loans, f);
     };
