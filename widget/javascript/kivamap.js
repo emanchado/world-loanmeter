@@ -1,8 +1,8 @@
 function KivaMap (mapSelector, mapCssSelector, data) {
-    this.mapSelector    = mapSelector;
-    this.mapCssSelector = mapCssSelector;
-    this.data           = data;
-    this.loansInPlace   = {};
+    this.mapSelector        = mapSelector;
+    this.mapCssSelector     = mapCssSelector;
+    this.data               = data;
+    this.htmlChunksForPlace = {};
 
     this.placeLoans = function () {
         var self = this;
@@ -13,7 +13,7 @@ function KivaMap (mapSelector, mapCssSelector, data) {
           // map for each place
           var placeId = 'location' +
                             loan.location.country.replace(/[^a-z]/gi, '-');
-          if (self.loansInPlace[placeId] == undefined) { // First loan
+          if (self.htmlChunksForPlace[placeId] == undefined) { // First loan
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
             mapMaker.placeIdByLatitudeAndLongitude(self.mapCssSelector,
@@ -25,25 +25,26 @@ function KivaMap (mapSelector, mapCssSelector, data) {
                             '">' + placeId + '</a>';
 
             $(self.mapSelector).prepend(htmlString);
-            var f = function () { map.showInfoInPanel(placeId); return false };
+            var f = function () { map.showLocationInfoInPanel(placeId); return false };
             $('#'+placeId).mouseover(f).focus(f);
 
-            self.loansInPlace[placeId] = ['<div class="loan-location">' +
-                                            loan.location.country +
-                                            '</div>'];
+            self.htmlChunksForPlace[placeId] = ['<div class="loan-location">' +
+                                                  loan.location.country +
+                                                  '</div>'];
           }
 
-          var infoExtraClass = (self.loansInPlace[placeId].length % 2 == 0) ?
-                                'even' : 'odd';
-          self.loansInPlace[placeId].push(self.data.loanInfoWithTemplate(loan,
-            '<div class="loan-info ' + infoExtraClass +
-              '"><a href="LOANLINK"><img src="LOANSMALLIMGURL" ' +
-              'alt="LOANTOWN, LOANCOUNTRY" /></a>' +
-              '<div class="loan-title"><a href="LOANLINK">BORROWERNAME</a></div>' +
-              '<div class="loanuse">LOANUSE</div>' +
-              '<div class="loanstatus">LOANSTATUS</div>' +
-              '<div class="loansectoractivity">LOANSECTOR - LOANACTIVITY</div>' +
-              '</div>'));
+          self.htmlChunksForPlace[placeId].push(
+                  self.data.loanInfoWithTemplate(loan,
+                      '<div class="loan-info">' +
+                        '<a href="LOANLINK"><img src="LOANSMALLIMGURL" ' +
+                        'alt="LOANTOWN, LOANCOUNTRY" /></a>' +
+                        '<div class="loan-title">' +
+                          '<a href="LOANLINK">BORROWERNAME</a></div>' +
+                          '<div class="loanuse">LOANUSE</div>' +
+                          '<div class="loanstatus">LOANSTATUS</div>' +
+                          '<div class="loansectoractivity">LOANSECTOR - ' +
+                            'LOANACTIVITY</div>' +
+                        '</div>'));
 
           // If any of the loans needs more money, add the 'needmoney' class
           if (parseFloat(loan.loan_amount) -
@@ -55,14 +56,14 @@ function KivaMap (mapSelector, mapCssSelector, data) {
     };
 
     this.refresh = function () {
-        this.loansInPlace = {};
+        this.htmlChunksForPlace = {};
         $(this.mapSelector).html('');
         $(this.mapCssSelector).html('');
         this.placeLoans();
     };
 
-    this.showInfoInPanel = function (locationId) {
-        $('#info-panel').html(this.loansInPlace[locationId].join(''));
+    this.showLocationInfoInPanel = function (locationId) {
+        $('#info-panel').html(this.htmlChunksForPlace[locationId].join(''));
     };
 
     return true;

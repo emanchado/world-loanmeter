@@ -166,10 +166,10 @@ a.location.needmoney {
         font-size: 10pt;
         padding: 5px;
 }
-.odd {
+.loan-info:nth-child(even) {
         background-color: #bbf;
 }
-.even {
+.loan-info:nth-child(odd) {
         background-color: #99f;
 }
 .loan-info .loan-title {
