@@ -206,6 +206,7 @@ a.location.needmoney {
 }
 .instructions {
         font-style: italic;
+        font-size: 9pt;
 }
 .instructions p:first-child {
         margin-top: 0;
