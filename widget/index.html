@@ -4,12 +4,16 @@
     <title>World Loanmeter</title>
     <link rel="stylesheet" type="text/css" href="style/kivaness.css">
     <script type="text/javascript" src="javascript/jquery.js"></script>
+    <!-- Data for development. See dataSource, below -->
+    <!-- script type="text/javascript" src="javascript/debugdata.js"></script -->
     <script type="text/javascript" src="javascript/kivadata.js"></script>
     <script type="text/javascript" src="javascript/map.js"></script>
     <script type="text/javascript" src="javascript/kivamap.js"></script>
 
     <script type="text/javascript">
       var data         = new KivaData();
+      // Uncomment for development. See above for the debugging data
+      // data.dataSource  = page1;
       var map          = new KivaMap('#main-map', '#map-css', data);
       data.numberLoans = widget.preferenceForKey('numberLoans') || 20;
 
