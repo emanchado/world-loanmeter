@@ -193,6 +193,17 @@ a.location.needmoney {
         clear: both;
         font-style: italic;
 }
+.loan-sector {
+        clear: both;
+        font-size: 10pt;
+        padding: 5px;
+}
+.loan-sector:nth-child(even) {
+        background-color: #bbf;
+}
+.loan-sector:nth-child(odd) {
+        background-color: #99f;
+}
 .instructions {
         font-style: italic;
 }

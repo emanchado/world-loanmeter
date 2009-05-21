@@ -81,5 +81,31 @@ function KivaMap (mapSelector, mapCssSelector, data) {
         $('#info-panel').html(this.htmlChunksForPlace[locationId].join(''));
     };
 
+    this.showSectorInfoInPanel = function (sectorId) {
+        $('#info-panel').html(this.htmlChunksForSector[sectorId].join(''));
+    };
+
+    this.showSectorDirectoryInPanel = function () {
+        var foundSectors = {};
+        var sectorList   = [];
+        var html = '<div class="loan-group-title">Loans by Sector</div>';
+        data.eachLoan(function () {
+            var s = this.sector;
+            if (foundSectors[s] == undefined) {
+                foundSectors[s] = 1;
+                sectorList.push(s);
+            }
+        });
+        jQuery.each(sectorList.sort(), function () {
+            html += '<div class="loan-sector"><a href="#" onclick="map.showSectorInfoInPanel(\'' +
+                    this + '\')">' + this + '</a></div>';
+        });
+        html += '<div class="loan-info instructions"><p>Click on a ' +
+                'dot to get information about loans in that country. ' +
+                'Click on a name or image for information and/or lend ' +
+                'money on <a href="http://www.kiva.org">Kiva</a>.</p></div>';
+        $('#info-panel').html(html);
+    };
+
     return true;
 };
