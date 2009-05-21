@@ -38,7 +38,7 @@ function KivaMap (mapSelector, mapCssSelector, data) {
 
             $(self.mapSelector).prepend(htmlString);
             var f = function () { map.showLocationInfoInPanel(placeId); return false };
-            $('#'+placeId).mouseover(f).focus(f);
+            $('#'+placeId).click(f);
 
             self.htmlChunksForPlace[placeId] =
                 ['<div class="loan-group-title">' +
