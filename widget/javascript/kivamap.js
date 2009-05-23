@@ -17,8 +17,10 @@ function KivaMap (mapSelector, mapCssSelector, data) {
                               '<a href="LOANLINK">BORROWERNAME</a></div>' +
                               '<div class="loanuse">LOANUSE</div>' +
                               '<div class="loanstatus">LOANSTATUS</div>' +
-                              '<div class="loansectoractivity"><a href="#" onclick="map.showSectorInfoInPanel(\'LOANSECTOR\')">LOANSECTOR</a> - ' +
-                                'LOANACTIVITY</div>' +
+                              '<div class="loansectoractivity"><a href="#" ' +
+                              'onclick="map.showSectorInfoInPanel' +
+                              '(\'LOANSECTOR\'); return false">LOANSECTOR' +
+                              '</a> - LOANACTIVITY</div>' +
                             '</div>');
 
           // Collect all the loans in each place, and put only one dot in the
@@ -44,8 +46,8 @@ function KivaMap (mapSelector, mapCssSelector, data) {
                 ['<div class="loan-group-title">' +
                     loan.location.country +
                     ' (<a href="#" ' +
-                       'onclick="map.showSectorDirectoryInPanel()">Browse ' +
-                       'Sectors</a>)</div>'];
+                       'onclick="map.showSectorDirectoryInPanel(); ' +
+                       'return false">Browse Sectors</a>)</div>'];
           }
 
           self.htmlChunksForPlace[placeId].push(loanHtml);
@@ -55,8 +57,8 @@ function KivaMap (mapSelector, mapCssSelector, data) {
               self.htmlChunksForSector[sectorId] =
                   ['<div class="loan-group-title">' + loan.sector +
                     ' (<a href="#" ' +
-                        'onclick="map.showSectorDirectoryInPanel()">' +
-                        'All Sectors</a>)</div>'];
+                        'onclick="map.showSectorDirectoryInPanel(); ' +
+                        'return false">All Sectors</a>)</div>'];
           }
 
           self.htmlChunksForSector[sectorId].push(loanHtml);
@@ -97,8 +99,9 @@ function KivaMap (mapSelector, mapCssSelector, data) {
             }
         });
         jQuery.each(sectorList.sort(), function () {
-            html += '<div class="loan-sector"><a href="#" onclick="map.showSectorInfoInPanel(\'' +
-                    this + '\')">' + this + '</a></div>';
+            html += '<div class="loan-sector"><a href="#" ' +
+                    'onclick="map.showSectorInfoInPanel(\'' +
+                    this + '\'); return false">' + this + '</a></div>';
         });
         html += '<div class="loan-info instructions"><p>Click on a ' +
                 'dot to get information about loans in that country. ' +
