@@ -132,6 +132,12 @@ h2 {
     overflow: auto;
 }
 
+#info-panel .notice {
+    font-weight: bold;
+    margin: 5px 8px;
+    font-size: 13pt;
+}
+
 a.location {
 	display:block;
 	position:absolute;
