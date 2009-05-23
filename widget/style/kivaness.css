@@ -94,9 +94,6 @@ h2 {
 
 /** Button effects **/
 
-/* #container:hover.controlbutton {
-  opacity: 0.3;
-} */
 #container .controlbutton:hover {
   opacity: 1.0;
 }
