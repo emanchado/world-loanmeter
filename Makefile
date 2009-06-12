@@ -1,4 +1,4 @@
-VERSION = 2.1
+VERSION = 2.1a
 WIDGET_FILENAME = loanmeter-$(VERSION).zip
 WIDGET_PATH = releases/$(WIDGET_FILENAME)
 
