@@ -87,11 +87,58 @@ function KivaMap (mapSelector, mapCssSelector, data) {
         $('#info-panel').html(this.htmlChunksForSector[sectorId].join(''));
     };
 
+    this.toggleSectorStats = function () {
+        var sectorInfo = {};
+        var sectorList = [];
+        this.data.eachLoan(function () {
+            var s = this.sector;
+            if (sectorInfo[s] == undefined) {
+                sectorInfo[s] = {loan_amount:   0,
+                                 funded_amount: 0};
+                sectorList.push(s);
+            }
+            sectorInfo[s].loan_amount   += parseFloat(this.loan_amount);
+            sectorInfo[s].funded_amount += parseFloat(this.funded_amount);
+        });
+        var sectorCount = 0;
+        var plotInfo    = [];
+        var axisLabels  = [];
+        var loanAmount  = [];
+        var fundedAmount = [];
+        jQuery.each(sectorList.sort(), function () {
+            loanAmount.push([sectorCount, sectorInfo[this].loan_amount]);
+            fundedAmount.push([sectorCount, sectorInfo[this].funded_amount]);
+            axisLabels.push([sectorCount, ""+this]);
+            sectorCount++;
+        });
+        plotInfo.push({data: loanAmount,
+                       label: "Needed",
+                       lines: {show: true, fill: true},
+                       points: {show: true, fill: true}});
+        plotInfo.push({data: fundedAmount,
+                       label: "Funded",
+                       lines: {show: true, fill: true},
+                       points: {show: true, fill: true}});
+
+        if ($('#stats-container').css('z-index') == -1) {
+            $('#stats-container').css('z-index', 5);
+        } else {
+            $('#stats-container').css('z-index', -1);
+        }
+        $.plot($('#stats'),
+               plotInfo,
+               {grid: {autoHighlight: true, tickColor: 'transparent'},
+                xaxis: {ticks: axisLabels}});
+    };
+
     this.showSectorDirectoryInPanel = function () {
         var foundSectors = {};
         var sectorList   = [];
-        var html = '<div class="loan-group-title">Loans by Sector</div>';
-        data.eachLoan(function () {
+        var html = '<div class="loan-group-title">Loans by Sector ' +
+                        '(<a href="#" ' +
+                            'onclick="map.toggleSectorStats(); ' +
+                                     'return false">toggle stats</a>)</div>';
+        this.data.eachLoan(function () {
             var s = this.sector;
             if (foundSectors[s] == undefined) {
                 foundSectors[s] = 1;

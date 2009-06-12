@@ -18,7 +18,8 @@ var mapMaker = {
       var cssTop, cssLeft;
       [pxTop, pxLeft] = this.latLongToPixels(latitude, longitude);
       cssRule = dotSel + ' {top:  ' + pxTop  + 'px; ' +
-                           'left: ' + pxLeft + 'px}\n';
+                           'left: ' + pxLeft + 'px; ' +
+                           'z-index: 2 }\n';
       $(mapStyleElementSelector).append(cssRule);
     }
 };

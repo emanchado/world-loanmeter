@@ -119,6 +119,23 @@ h2 {
 	padding:0px;
 	border:#999 1px solid;
 }
+#stats-container {
+        position: absolute;
+        top: 47px;
+        left: 14px;
+        z-index: -1;
+        padding: 15px;
+        padding-right: 25px;
+        opacity: 0.85;
+        background: #fff;
+}
+#stats {
+        width:510px;
+        height:245px;
+        margin:0px;
+        padding:0px;
+        border:0px;
+}
 
 
 /* Left information panel */
