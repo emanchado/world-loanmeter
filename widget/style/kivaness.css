@@ -231,3 +231,7 @@ a.location.needmoney {
 .instructions p:first-child {
         margin-top: 0;
 }
+
+.tickLabelXaxis:nth-child(even) {
+    padding-top: 2ex;
+}
