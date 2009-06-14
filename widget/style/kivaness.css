@@ -1,15 +1,15 @@
 /** Basic styles **/
 
 body {
-  font-family: Verdana, Helvetica, sans-serif;
-  font-size: 16px;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 h1 {
-  margin: 0;
-  font-size: 1.1em;
-  padding: 7px 0 0 10px;
-  font-weight: normal;
+    margin: 0;
+    font-size: 1.1em;
+    padding: 7px 0 0 10px;
+    font-weight: normal;
 }
 
 h2 {
@@ -21,47 +21,56 @@ h2 {
 /** Structure **/
 
 #front {
-  margin: 0;
-  margin-left: 5px;
-  border: 0;
-  padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    border: 0;
+    padding: 0;
 }
 
 #config {
-  display: none;
-  margin: 0;
-  margin-left: 5px;
-  margin-right: 3px;
-  border: 0;
-  padding: 0;
-  padding-left: 10px;
-  background-color: #99f;
+    display: none;
+    margin: 0;
+    margin-left: 5px;
+    margin-right: 3px;
+    border: 0;
+    padding: 0;
+    padding-left: 10px;
+    background-color: #99f;
 }
 
 #container {
-  /* width: 560px; */
-  margin: 0;
-  border: 0;
-  width: 860px;
+    margin: 0;
+    border: 0;
+    width: 860px;
 }
 
 #header {
-  background-image: url(../images/back_top.png);
-  padding: 4px 10px 0px 10px;
-  height: 35px;
+    background-image: url(../images/back_top.png);
+    padding: 4px 10px 0px 10px;
+    height: 35px;
 }
 
 #content {
-  background-image: url(../images/back_center.png);
-  color: #333;
-  margin-left: 0;
+    background-image: url(../images/back_center.png);
+    color: #333;
+    margin-left: 0;
 }
 
 #footer {
-  background-image: url(../images/back_bottom.png);
-  height: 23px;
-  padding: 2px 0 0 10px;
-  font-size: 0.6em;
+    background-image: url(../images/back_bottom.png);
+    height: 23px;
+    padding: 2px 0 0 10px;
+    font-size: 0.6em;
+}
+#view-icons {
+    float: right;
+    padding-right: 8px;
+}
+#view-icons img {
+    opacity: 0.4;
+}
+#view-icons img:hover {
+    opacity: 0.7;
 }
 
 
@@ -69,37 +78,37 @@ h2 {
 /** Button styles **/
 
 #controlbuttons {
-  float: right;
+    float: right;
 }
 .controlbutton {
-  opacity: 0.3;
-  overflow: hidden;
-  height: 30px;
-  width: 30px;
-  background-position: left top;
-  border: 0;
+    opacity: 0.3;
+    overflow: hidden;
+    height: 30px;
+    width: 30px;
+    background-position: left top;
+    border: 0;
 }
 #flipbutton {
-  background: transparent url(../images/btn_config.png) scroll no-repeat 0 0;
+    background: transparent url(../images/btn_config.png) scroll no-repeat 0 0;
 }
 #closebutton {
-  background: transparent url(../images/btn_close.png) scroll no-repeat 0 0;
+    background: transparent url(../images/btn_close.png) scroll no-repeat 0 0;
 }
 #spinner {
-  float: left;
-  height: 32px;
-  width: 32px;
-  margin-right: 3px;
+    float: left;
+    height: 32px;
+    width: 32px;
+    margin-right: 3px;
 }
 
 /** Button effects **/
 
 #container .controlbutton:hover {
-  opacity: 1.0;
+    opacity: 1.0;
 }
 #container .controlbutton:active {
-  opacity: 1.0;
-  background-position: left bottom;
+    opacity: 1.0;
+    background-position: left bottom;
 }
 
 
@@ -110,31 +119,31 @@ h2 {
 
 
 #main-map {
-	position:relative;
-	width:550px;
-	height:275px;
-	background:url(../images/map.jpg) no-repeat;
-	text-align:left;
-	margin:0px;
-	padding:0px;
-	border:#999 1px solid;
+    position:relative;
+    width:550px;
+    height:275px;
+    background:url(../images/map.jpg) no-repeat;
+    text-align:left;
+    margin:0px;
+    padding:0px;
+    border:#999 1px solid;
 }
 #stats-container {
-        position: absolute;
-        top: 47px;
-        left: 14px;
-        z-index: -1;
-        padding: 15px;
-        padding-right: 25px;
-        opacity: 0.85;
-        background: #fff;
+    position: absolute;
+    top: 47px;
+    left: 14px;
+    z-index: -1;
+    padding: 15px;
+    padding-right: 25px;
+    opacity: 0.85;
+    background: #fff;
 }
 #stats {
-        width:510px;
-        height:245px;
-        margin:0px;
-        padding:0px;
-        border:0px;
+    width:510px;
+    height:245px;
+    margin:0px;
+    padding:0px;
+    border:0px;
 }
 
 
@@ -156,80 +165,85 @@ h2 {
 }
 
 a.location {
-	display:block;
-	position:absolute;
-	text-indent:-9999px;
-	background:url(../images/point.png) no-repeat;
-	width:10px;
-	height:10px;
-	outline:none;
-	z-index:10;
-	text-decoration:none;
+    display:block;
+    position:absolute;
+    text-indent:-9999px;
+    background:url(../images/point.png) no-repeat;
+    width:10px;
+    height:10px;
+    outline:none;
+    z-index:10;
+    text-decoration:none;
 }
 a.location:hover {
-	background:url(../images/point-hover.png) no-repeat -1px -1px;
+    background:url(../images/point-hover.png) no-repeat -1px -1px;
 }
 a.location.needmoney {
-	background:url(../images/point-deficit.png) no-repeat;
+    background:url(../images/point-deficit.png) no-repeat;
 }
 
 .loan-group-title {
-        font-weight: bold;
-        margin-left: 8px;
-        font-size: 13pt;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 13pt;
 }
 .loan-title {
-        font-weight: bold;
+    font-weight: bold;
 }
 .loan-info {
-        clear: both;
-        font-size: 10pt;
-        padding: 5px;
+    clear: both;
+    font-size: 10pt;
+    padding: 5px;
 }
 .loan-info:nth-child(even) {
-        background-color: #bbf;
+    background-color: #bbf;
 }
 .loan-info:nth-child(odd) {
-        background-color: #99f;
+    background-color: #99f;
 }
 .loan-info .loan-title {
-        font-size: 11pt;
+    font-size: 11pt;
 }
 .loan-info .loan-title a {
-        text-decoration: none;
+    text-decoration: none;
 }
 .loan-info img {
-        float: right;
-        margin-left: 5px;
-        margin-bottom: 5px;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 5px;
 }
 .loan-info .loanuse {
 }
 .loan-info .loanstatus {
-        font-size: 85%;
-        font-style: italic;
+    font-size: 85%;
+    font-style: italic;
 }
 .loan-info .loansectoractivity {
-        clear: both;
-        font-style: italic;
+    clear: both;
+    font-style: italic;
 }
 .loan-sector {
-        clear: both;
-        font-size: 10pt;
-        padding: 5px;
+    clear: both;
+    font-size: 10pt;
+    padding: 5px;
 }
 .loan-sector:nth-child(even) {
-        background-color: #bbf;
+    background-color: #bbf;
 }
 .loan-sector:nth-child(odd) {
-        background-color: #99f;
+    background-color: #99f;
 }
 .instructions {
-        font-style: italic;
-        font-size: 9pt;
+    font-style: italic;
+    font-size: 9pt;
 }
 .instructions p:first-child {
-        margin-top: 0;
+    margin-top: 0;
+}
+img.inline-image {
+    float: none;
+    border: 0;
+    margin: 0;
 }
 
 .tickLabelXaxis:nth-child(even) {

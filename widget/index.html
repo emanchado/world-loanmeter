@@ -15,16 +15,35 @@
       var data         = new KivaData();
       // Uncomment for development. See above for the debugging data
       // data.dataSource  = page1;
-      var map          = new KivaMap('#main-map', '#map-css', data);
+      var map          = new KivaMap({'map': '#main-map',
+                                      'mapCss': '#map-css',
+                                      'stats': '#stats',
+                                      'infoPanel': '#info-panel'},
+                                     data);
       data.numberLoans = widget.preferenceForKey('numberLoans') || 20;
 
       $(document).ready(function(ev) {
         $('#spinner').show('fast');
         data.refresh(function () {
-          map.placeLoans();
+          map.refresh();
           $('#spinner').hide('fast');
           // Add sector list to the info panel
           map.showSectorDirectoryInPanel();
+          // Show the default 'Worldmap View' icon as pressed
+          $('#worldmap-view-icon').css('opacity', 1);
+        });
+
+        $('#worldmap-view-icon').click(function () {
+          $('#worldmap-view-icon').css('opacity', 1);
+          $('#stats-view-icon'   ).css('opacity', '');
+          $('#stats-container'   ).css('z-index', -1);
+        });
+
+        $('#stats-view-icon').click(function () {
+          $('#stats-view-icon'   ).css('opacity', 1);
+          $('#worldmap-view-icon').css('opacity', '');
+          $('#stats-container'   ).css('z-index', 5);
+          map.updateSectorStats();
         });
 
         $('#flipbutton').click(function () {
@@ -42,9 +61,11 @@
           widget.setPreferenceForKey(data.numberLoans, 'numberLoans');
           $('#spinner').show('fast');
           data.refresh(function () {
+            // Flip first, as otherwise map.refresh() will die when updating
+            // the stats (the stats canvas won't be visible)
+            flip();
             map.refresh();
             $('#spinner').hide('fast');
-            flip();
           });
         });
       });
@@ -95,7 +116,13 @@
           </div>
         </div>
       </div>
-      <div id="footer">Powered by Opera Widgets, jQuery and <a href="http://build.kiva.org/">Kiva API</a></div>
+      <div id="footer">Powered by Opera Widgets, jQuery and
+        <a href="http://build.kiva.org/">Kiva API</a>
+        <span id="view-icons">
+          <img id="worldmap-view-icon" src="images/icon_map.png"/>
+          <img id="stats-view-icon" src="images/icon_stats.png"/>
+        </span>
+      </div>
     </div>
   </body>
 </html>

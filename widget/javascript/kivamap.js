@@ -1,6 +1,9 @@
-function KivaMap (mapSelector, mapCssSelector, data) {
-    this.mapSelector         = mapSelector;
-    this.mapCssSelector      = mapCssSelector;
+function KivaMap (selectors, data) {
+    this.selectors = {};
+    var self = this;
+    jQuery.each(['map', 'mapCss', 'stats', 'infoPanel'], function () {
+        self.selectors[this] = selectors[this];
+    });
     this.data                = data;
     this.htmlChunksForPlace  = {};
     this.htmlChunksForSector = {};
@@ -30,7 +33,7 @@ function KivaMap (mapSelector, mapCssSelector, data) {
           if (self.htmlChunksForPlace[placeId] == undefined) {
             [lat, lon] = loan.location.geo.pairs.split(' ');
 
-            mapMaker.placeIdByLatitudeAndLongitude(self.mapCssSelector,
+            mapMaker.placeIdByLatitudeAndLongitude(self.selectors.mapCss,
                                                    '#'+placeId,
                                                    parseFloat(lat),
                                                    parseFloat(lon));
@@ -38,7 +41,7 @@ function KivaMap (mapSelector, mapCssSelector, data) {
                             'id="' + placeId +
                             '">' + placeId + '</a>';
 
-            $(self.mapSelector).prepend(htmlString);
+            $(self.selectors.map).prepend(htmlString);
             var f = function () { map.showLocationInfoInPanel(placeId); return false };
             $('#'+placeId).click(f);
 
@@ -74,20 +77,49 @@ function KivaMap (mapSelector, mapCssSelector, data) {
 
     this.refresh = function () {
         this.htmlChunksForPlace = {};
-        $(this.mapSelector).html('');
-        $(this.mapCssSelector).html('');
+        $(this.selectors.map).html('');
+        $(this.selectors.mapCss).html('');
         this.placeLoans();
+        this.updateSectorStats();
     };
 
     this.showLocationInfoInPanel = function (locationId) {
-        $('#info-panel').html(this.htmlChunksForPlace[locationId].join(''));
+        $(this.selectors.infoPanel).html(
+                this.htmlChunksForPlace[locationId].join(''));
     };
 
     this.showSectorInfoInPanel = function (sectorId) {
-        $('#info-panel').html(this.htmlChunksForSector[sectorId].join(''));
+        $(this.selectors.infoPanel).html(
+                this.htmlChunksForSector[sectorId].join(''));
     };
 
-    this.toggleSectorStats = function () {
+    this.showSectorDirectoryInPanel = function () {
+        var foundSectors = {};
+        var sectorList   = [];
+        var html = '<div class="loan-group-title">Loans by Sector</div>';
+        this.data.eachLoan(function () {
+            var s = this.sector;
+            if (foundSectors[s] == undefined) {
+                foundSectors[s] = 1;
+                sectorList.push(s);
+            }
+        });
+        jQuery.each(sectorList.sort(), function () {
+            html += '<div class="loan-sector"><a href="#" ' +
+                    'onclick="map.showSectorInfoInPanel(\'' +
+                    this + '\'); return false">' + this + '</a></div>';
+        });
+        html += '<div class="loan-info instructions"><p>Click on a ' +
+                'dot to get information about loans in that country. ' +
+                'Click on a name or image for information and/or lend ' +
+                'money on <a href="http://www.kiva.org">Kiva</a>. Click ' +
+                'on <img class="inline-image" src="images/icon_map.png"/> ' +
+                'and <img class="inline-image" src="images/icon_stats.png"/> ' +
+                'to change the view.</p></div>';
+        $(this.selectors.infoPanel).html(html);
+    };
+
+    this.updateSectorStats = function () {
         var sectorInfo = {};
         var sectorList = [];
         this.data.eachLoan(function () {
@@ -120,41 +152,10 @@ function KivaMap (mapSelector, mapCssSelector, data) {
                        lines: {show: true, fill: true},
                        points: {show: true, fill: true}});
 
-        if ($('#stats-container').css('z-index') == -1) {
-            $('#stats-container').css('z-index', 5);
-        } else {
-            $('#stats-container').css('z-index', -1);
-        }
-        $.plot($('#stats'),
+        $.plot($(this.selectors.stats),
                plotInfo,
                {grid: {autoHighlight: true, tickColor: 'transparent'},
                 xaxis: {ticks: axisLabels}});
-    };
-
-    this.showSectorDirectoryInPanel = function () {
-        var foundSectors = {};
-        var sectorList   = [];
-        var html = '<div class="loan-group-title">Loans by Sector ' +
-                        '(<a href="#" ' +
-                            'onclick="map.toggleSectorStats(); ' +
-                                     'return false">toggle stats</a>)</div>';
-        this.data.eachLoan(function () {
-            var s = this.sector;
-            if (foundSectors[s] == undefined) {
-                foundSectors[s] = 1;
-                sectorList.push(s);
-            }
-        });
-        jQuery.each(sectorList.sort(), function () {
-            html += '<div class="loan-sector"><a href="#" ' +
-                    'onclick="map.showSectorInfoInPanel(\'' +
-                    this + '\'); return false">' + this + '</a></div>';
-        });
-        html += '<div class="loan-info instructions"><p>Click on a ' +
-                'dot to get information about loans in that country. ' +
-                'Click on a name or image for information and/or lend ' +
-                'money on <a href="http://www.kiva.org">Kiva</a>.</p></div>';
-        $('#info-panel').html(html);
     };
 
     return true;
