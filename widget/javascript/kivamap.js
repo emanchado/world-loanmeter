@@ -8,6 +8,8 @@ function KivaMap (selectors, data) {
     this.htmlChunksForPlace  = {};
     this.htmlChunksForSector = {};
 
+    // Places a dot in every country where there is at least one loan. Each dot
+    // has appropriate event handlers to show the information in the info panel
     this.placeLoans = function () {
         var self = this;
         this.data.eachLoan(function () {
@@ -75,6 +77,8 @@ function KivaMap (selectors, data) {
         });
     };
 
+    // Updates the map and sector stats graph with the current data.
+    // NOTE: This function should be called every time the data is updated
     this.refresh = function () {
         this.htmlChunksForPlace = {};
         $(this.selectors.map).html('');
@@ -108,13 +112,14 @@ function KivaMap (selectors, data) {
                 'money on <a href="http://www.kiva.org">Kiva</a>. Click ' +
                 'on <img class="inline-image" src="images/icon_map.png"/> ' +
                 'and <img class="inline-image" src="images/icon_stats.png"/> ' +
-                'to change the view.</p></div>';
+                'below to change the view.</p></div>';
         $(this.selectors.infoPanel).html(html);
     };
 
+    // Updates the statistics graph. The graph element has to be visible (width
+    // and height > 0) for this method to work.
     this.updateSectorStats = function () {
         var sectorCount = 0;
-        var plotInfo    = [];
         var axisLabels  = [];
         var loanAmount  = [];
         var fundedAmount = [];
@@ -124,6 +129,7 @@ function KivaMap (selectors, data) {
             fundedAmount.push([sectorCount, this.funded_amount]);
             sectorCount++;
         });
+        var plotInfo    = [];
         plotInfo.push({data: loanAmount,
                        label: "Needed",
                        lines: {show: true, fill: true},
