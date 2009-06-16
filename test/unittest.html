@@ -21,7 +21,7 @@ test("Basic latLongToPixels tests", function() {
   equals(y, 250, "The 'y' is correct");
 });
 
-module("eachLoan iterator");
+module("Iterators");
 
 test("eachLoan simple test", function() {
   var kivaData = new KivaData();
@@ -38,6 +38,27 @@ test("eachLoan simple test", function() {
          "Name of second loan should be correct");
   equals(loanList[2].name, 'Lydia Afriyie',
          "Name of third loan should be correct");
+});
+
+test("sectorList simple test", function() {
+  var kivaData = new KivaData();
+  kivaData.loanInfo = loansSimple;
+  var actualSectorList = kivaData.sectorList();
+  var expectedSectorList = [{name: "Food",
+                             loan_amount: 600,
+                             funded_amount: 75},
+                            {name: "Retail",
+                             loan_amount: 1075,
+                             funded_amount: 250}];
+  equals(actualSectorList.length, expectedSectorList.length,
+         "The sector list should have the correct number of elements");
+  for (var i = 0; i < expectedSectorList.length; i++) {
+    jQuery.each(['name', 'loan_amount', 'funded_amount'], function () {
+      equals(actualSectorList[i][this],
+             expectedSectorList[i][this],
+             'Property ' + this + ' from sector ' + i + ' should be correct');
+    });
+  }
 });
 
 module("Data fetching");

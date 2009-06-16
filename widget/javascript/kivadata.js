@@ -129,5 +129,28 @@ function KivaData () {
                                     ' to go)');
     };
 
+    // Returns a list of objects representing sectors, sorted alphabetically.
+    // Each object has the properties 'name', 'loan_amount' and 'funded_amount'
+    this.sectorList = function () {
+        var sectorInfo     = {};
+        var sectorNameList = [];
+        this.eachLoan(function () {
+            var s = this.sector;
+            if (sectorInfo[s] == undefined) {
+                sectorInfo[s] = {loan_amount:   0,
+                                 funded_amount: 0,
+                                 name:          s};
+                sectorNameList.push(s);
+            }
+            sectorInfo[s].loan_amount   += parseFloat(this.loan_amount);
+            sectorInfo[s].funded_amount += parseFloat(this.funded_amount);
+        });
+        var sectorList = [];
+        jQuery.each(sectorNameList.sort(), function () {
+            sectorList.push(sectorInfo[this]);
+        });
+        return sectorList;
+    };
+
     return true;
 };
