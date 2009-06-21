@@ -125,8 +125,8 @@ function KivaMap (selectors, data) {
         var fundedAmount = [];
         jQuery.each(this.data.sectorList(), function () {
             axisLabels.push([sectorCount, ""+this.name]);
-            loanAmount.push([sectorCount, this.loan_amount]);
-            fundedAmount.push([sectorCount, this.funded_amount]);
+            loanAmount.push([sectorCount, this.loanAmount]);
+            fundedAmount.push([sectorCount, this.fundedAmount]);
             sectorCount++;
         });
         var plotInfo    = [];

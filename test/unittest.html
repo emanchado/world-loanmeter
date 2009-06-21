@@ -45,15 +45,15 @@ test("sectorList simple test", function() {
   kivaData.loanInfo = loansSimple;
   var actualSectorList = kivaData.sectorList();
   var expectedSectorList = [{name: "Food",
-                             loan_amount: 600,
-                             funded_amount: 75},
+                             loanAmount: 600,
+                             fundedAmount: 75},
                             {name: "Retail",
-                             loan_amount: 1075,
-                             funded_amount: 250}];
+                             loanAmount: 1075,
+                             fundedAmount: 250}];
   equals(actualSectorList.length, expectedSectorList.length,
          "The sector list should have the correct number of elements");
   for (var i = 0; i < expectedSectorList.length; i++) {
-    jQuery.each(['name', 'loan_amount', 'funded_amount'], function () {
+    jQuery.each(['name', 'loanAmount', 'fundedAmount'], function () {
       equals(actualSectorList[i][this],
              expectedSectorList[i][this],
              'Property ' + this + ' from sector ' + i + ' should be correct');

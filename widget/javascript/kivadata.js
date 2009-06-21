@@ -137,13 +137,13 @@ function KivaData () {
         this.eachLoan(function () {
             var s = this.sector;
             if (sectorInfo[s] == undefined) {
-                sectorInfo[s] = {loan_amount:   0,
-                                 funded_amount: 0,
+                sectorInfo[s] = {loanAmount:   0,
+                                 fundedAmount: 0,
                                  name:          s};
                 sectorNameList.push(s);
             }
-            sectorInfo[s].loan_amount   += parseFloat(this.loan_amount);
-            sectorInfo[s].funded_amount += parseFloat(this.funded_amount);
+            sectorInfo[s].loanAmount   += parseFloat(this.loan_amount);
+            sectorInfo[s].fundedAmount += parseFloat(this.funded_amount);
         });
         var sectorList = [];
         jQuery.each(sectorNameList.sort(), function () {
