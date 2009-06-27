@@ -81,9 +81,11 @@ function KivaMap (selectors, data) {
     // NOTE: This function should be called every time the data is updated
     this.refresh = function () {
         this.htmlChunksForPlace = {};
+        this.htmlChunksForSector = {};
         $(this.selectors.map).html('');
         $(this.selectors.mapCss).html('');
         this.placeLoans();
+        this.showSectorDirectoryInPanel();
         this.updateSectorStats();
     };
 
