@@ -22,6 +22,7 @@
                                      data);
       data.numberLoans = widget.preferenceForKey('numberLoans') || 20;
 
+      var resetTooltipTimeout = undefined;
       $(document).ready(function(ev) {
         $('#spinner').show('fast');
         data.refresh(function () {
@@ -31,6 +32,28 @@
           map.showSectorDirectoryInPanel();
           // Show the default 'Worldmap View' icon as pressed
           $('#worldmap-view-icon').css('opacity', 1);
+        });
+
+        $('#stats').bind("plothover", function (event, pos, item) {
+          if (item) {
+            if (resetTooltipTimeout) {
+              clearTimeout(resetTooltipTimeout);
+              resetTooltipTimeout = undefined;
+            }
+            var sector = data.sectorList()[item.dataIndex];
+            $('#tooltip').html(sector.name +
+              '<br/>$' + sector.fundedAmount + '&nbsp;funded<br/>$' +
+              sector.loanAmount + '&nbsp;needed');
+            $('#tooltip').css('display', 'block');
+            $('#tooltip').css('top',     pos.pageY - 60);
+            $('#tooltip').css('left',    pos.pageX);
+          } else {
+            if (resetTooltipTimeout == undefined) {
+              resetTooltipTimeout = setTimeout(function () {
+                  $('#tooltip').css('display', '');
+                }, 1000);
+            }
+          }
         });
 
         $('#worldmap-view-icon').click(function () {
@@ -100,6 +123,7 @@
           <div id="main-map" class="map"></div>
           <div id="stats-container">
             <div id="stats"></div>
+            <div id="tooltip" class="tooltip">Some tip</div>
           </div>
           <div id="info-panel"><div class="notice">Loading loan information
               from Kiva...</div></div>

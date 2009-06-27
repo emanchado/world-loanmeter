@@ -249,3 +249,15 @@ img.inline-image {
 .tickLabelXaxis:nth-child(even) {
     padding-top: 2ex;
 }
+
+div.tooltip {
+    opacity: 1.0;
+    background-color: #99f;
+    position: absolute;
+    padding: 5px;
+
+    font-size:14px;
+    display:none;
+    color:#fff;
+    z-index: 15;
+}

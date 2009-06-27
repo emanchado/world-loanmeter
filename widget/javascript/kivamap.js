@@ -141,7 +141,9 @@ function KivaMap (selectors, data) {
 
         $.plot($(this.selectors.stats),
                plotInfo,
-               {grid: {autoHighlight: true, tickColor: 'transparent'},
+               {grid: {autoHighlight: true,
+                       tickColor: 'transparent',
+                       hoverable: true},
                 xaxis: {ticks: axisLabels}});
     };
 
