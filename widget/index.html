@@ -56,6 +56,13 @@
           }
         });
 
+        $('#stats').bind("plotclick", function (event, pos, item) {
+          if (item) {
+            var sector = data.sectorList()[item.dataIndex];
+            map.showSectorInfoInPanel(sector.name);
+          }
+        });
+
         $('#worldmap-view-icon').click(function () {
           $('#worldmap-view-icon').css('opacity', 1);
           $('#stats-view-icon'   ).css('opacity', '');

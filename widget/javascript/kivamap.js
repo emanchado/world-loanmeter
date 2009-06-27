@@ -143,7 +143,8 @@ function KivaMap (selectors, data) {
                plotInfo,
                {grid: {autoHighlight: true,
                        tickColor: 'transparent',
-                       hoverable: true},
+                       hoverable: true,
+                       clickable: true},
                 xaxis: {ticks: axisLabels}});
     };
 
