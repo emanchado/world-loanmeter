@@ -15,4 +15,8 @@
     <name>Loanmeter</name>
     <revised>2009-02</revised>
   </id>
+  <icon>icons/128_widget_icon.png</icon>
+  <icon>icons/64_widget_icon.png</icon>
+  <icon>icons/32_widget_icon.png</icon>
+  <icon>icons/16_widget_icon.png</icon>
 </widget>
