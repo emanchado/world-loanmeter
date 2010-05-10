@@ -15,11 +15,11 @@ var mapMaker = {
     // longitude
     placeIdByLatitudeAndLongitude: function (mapStyleElementSelector, dotSel,
                                              latitude, longitude) {
-      var cssTop, cssLeft;
-      [pxTop, pxLeft] = this.latLongToPixels(latitude, longitude);
-      cssRule = dotSel + ' {top:  ' + pxTop  + 'px; ' +
-                           'left: ' + pxLeft + 'px; ' +
-                           'z-index: 2 }\n';
+      var pair = this.latLongToPixels(latitude, longitude);
+      var pxTop = pair[0], pxLeft = pair[1];
+      var cssRule = dotSel + ' {top:  ' + pxTop  + 'px; ' +
+                               'left: ' + pxLeft + 'px; ' +
+                               'z-index: 2 }\n';
       $(mapStyleElementSelector).append(cssRule);
     }
 };

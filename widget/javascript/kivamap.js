@@ -33,7 +33,8 @@ function KivaMap (selectors, data) {
           var placeId = 'location' +
                             loan.location.country.replace(/[^a-z]/gi, '-');
           if (self.htmlChunksForPlace[placeId] == undefined) {
-            [lat, lon] = loan.location.geo.pairs.split(' ');
+            var pair = loan.location.geo.pairs.split(' ');
+            var lat = pair[0], lon = pair[1];
 
             mapMaker.placeIdByLatitudeAndLongitude(self.selectors.mapCss,
                                                    '#'+placeId,
