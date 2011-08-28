@@ -15,10 +15,9 @@
 module("Latitude/longitude conversion");
 
 test("Basic latLongToPixels tests", function() {
-  var x, y;
-  [x,y] = mapMaker.latLongToPixels(12.5833, -16.2719);
-  equals(x, 118, "The 'x' is correct");
-  equals(y, 250, "The 'y' is correct");
+  coords = mapMaker.latLongToPixels(12.5833, -16.2719);
+  equals(coords[0], 118, "The 'x' is correct");
+  equals(coords[1], 250, "The 'y' is correct");
 });
 
 module("Iterators");
