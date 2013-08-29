@@ -1,3 +1,20 @@
+DEPRECATED
+==========
+
+This extension is deprecated. It was written for Opera 12, it will not work (I guess?) on Opera >= 15.
+
+
+
+
+
+
+
+
+
+
+
+Old README contents
+===================
 Opera widget that shows the latest microloans from Kiva, by
 geographical location or activity.
 
